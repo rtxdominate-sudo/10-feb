@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teddy Day 🧸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-pink: #ffc9d4;
+            --soft-beige: #f5e6d3;
+            --cream-white: #fff8f0;
+            --soft-brown: #c49a6c;
+            --deep-pink: #ffb3c6;
+            --teddy-brown: #8b6f47;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--cream-white) 0%, var(--soft-beige) 50%, var(--pastel-pink) 100%);
+            color: #6b5b4d;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Music control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--pastel-pink);
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 185, 198, 0.3);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            color: var(--teddy-brown);
+            font-weight: 600;
+        }
+
+        .music-control:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 185, 198, 0.4);
+        }
+
+        /* Landing section */
+        .landing {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .floating-teddy {
+            font-size: 120px;
+            animation: bounce 2s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(139, 111, 71, 0.2));
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .opening-line {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(28px, 5vw, 48px);
+            color: var(--teddy-brown);
+            margin-top: 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            line-height: 1.5;
+            max-width: 800px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-hint {
+            margin-top: 50px;
+            font-size: 14px;
+            color: var(--soft-brown);
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .scroll-arrow {
+            font-size: 24px;
+            animation: bounce-arrow 2s infinite ease-in-out;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* Section styling */
+        section {
+            padding: 80px 20px;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(32px, 4vw, 48px);
+            color: var(--teddy-brown);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🧸';
+            display: block;
+            font-size: 40px;
+            margin-top: 15px;
+        }
+
+        /* Warm message section */
+        .warm-message {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(255, 185, 198, 0.2);
+            border: 3px solid rgba(255, 201, 212, 0.3);
+        }
+
+        .warm-message p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            line-height: 1.8;
+            color: #6b5b4d;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Reasons cards */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(255, 185, 198, 0.15);
+            border: 2px solid rgba(255, 201, 212, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 201, 212, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .reason-card:hover::before {
+            opacity: 1;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 185, 198, 0.3);
+            border-color: var(--pastel-pink);
+        }
+
+        .reason-emoji {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+            animation: wiggle 3s infinite ease-in-out;
+        }
+
+        @keyframes wiggle {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .reason-text {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #6b5b4d;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        /* Virtual hug section */
+        .hug-section {
+            text-align: center;
+        }
+
+        .hug-button {
+            background: linear-gradient(135deg, var(--pastel-pink), var(--deep-pink));
+            color: white;
+            border: none;
+            padding: 25px 60px;
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 179, 198, 0.4);
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .hug-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 179, 198, 0.6);
+        }
+
+        .hug-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Hug popup */
+        .hug-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(255, 185, 198, 0.5);
+            z-index: 2000;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 4px solid var(--pastel-pink);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hug-popup.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .hug-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hug-popup-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup-teddy {
+            font-size: 100px;
+            animation: hug-bounce 0.6s ease-in-out;
+        }
+
+        @keyframes hug-bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .popup-hearts {
+            font-size: 30px;
+            margin: 20px 0;
+            animation: pulse 1s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .popup-message {
+            font-size: 22px;
+            color: var(--teddy-brown);
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .popup-close {
+            background: var(--pastel-pink);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: var(--deep-pink);
+            transform: scale(1.05);
+        }
+
+        /* Memory section */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 185, 198, 0.2);
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 201, 212, 0.3);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(255, 185, 198, 0.4);
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .memory-text {
+            padding: 25px;
+            font-size: 18px;
+            color: #6b5b4d;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* Closing section */
+        .closing {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 40px;
+            padding: 80px 40px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(255, 185, 198, 0.3);
+            border: 4px solid rgba(255, 201, 212, 0.4);
+        }
+
+        .closing-text {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(24px, 3.5vw, 40px);
+            color: var(--teddy-brown);
+            line-height: 1.6;
+        }
+
+        .closing-emoji {
+            font-size: 60px;
+            margin-top: 30px;
+            display: block;
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(20px, 2.5vw, 28px);
+            color: var(--teddy-brown);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-teddy {
+                font-size: 80px;
+            }
+
+            .warm-message {
+                padding: 40px 25px;
+            }
+
+            .reason-card {
+                padding: 30px 20px;
+            }
+
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .closing {
+                padding: 50px 30px;
+            }
+
+            .hug-popup {
+                padding: 40px 30px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll reveal animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Music control -->
+    <div class="music-control" id="musicToggle">
+        🎵 Music On
+    </div>
+
+    <!-- Hidden audio element -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4c0c2cbbd1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Landing Section -->
+        <section class="landing">
+            <div class="floating-teddy">🧸</div>
+            <h1 class="opening-line">" I'll always be the teddy you hug every day." 🧸</h1>
+            <div class="scroll-hint">
+                Scroll to see more
+                <span class="scroll-arrow">↓</span>
+            </div>
+        </section>
+
+        <!-- Warm Message Section -->
+        <section class="scroll-reveal">
+            <h2 class="section-title">A Warm Message</h2>
+            <div class="warm-message">
+                <p>You are my safe place, my comfort, and my home. Every moment with you feels like the warmest hug. I promise to always be here for you, to protect you, and to make you feel emotionally safe. Just like a teddy bear, I'll be your constant companion through every joy and every challenge. You mean the world to me. 💕</p>
+            </div>
+        </section>
+
+        <!-- Reasons Section -->
+        <section class="scroll-reveal">
+            <h2 class="section-title">Reasons You're My Comfort</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <span class="reason-emoji">🧸</span>
+                    <p class="reason-text">"If I had to select a teddy, I'll always choose you."</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-emoji">🫂</span>
+                    <p class="reason-text">"Your Hug feels a home to me and it makes me forget all my problems."</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-emoji">💝</span>
+                    <p class="reason-text">You make every day brighter just by being yourself.</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-emoji">🌟</span>
+                    <p class="reason-text">Your presence is my greatest comfort and joy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Hug Section -->
+        <section class="hug-section scroll-reveal">
+            <h2 class="section-title">Need a Hug?</h2>
+            <button class="hug-button" id="hugButton">Get a Hug 🫂</button>
+        </section>
+
+        <!-- Our Cozy Moments Section -->
+        <section class="scroll-reveal">
+            <h2 class="section-title">Our Cozy Moments</h2>
+            <div class="memories-grid">
+                <div class="memory-card">
+                    <img src="IMG-20251217-WA0030.jpg" alt="Beautiful moment together" class="memory-image">
+                    <p class="memory-text">Every moment with you is a treasure I hold close to my heart. 💕</p>
+                </div>
+                <div class="memory-card">
+                    <img src="IMG_20260201_182951.jpg" alt="Our special time" class="memory-image">
+                    <p class="memory-text">These are the moments that make life beautiful and meaningful. 🌸</p>
+                </div>
+                <div class="memory-card">
+                    <img src="IMG-20260202-WA0095.jpg" alt="Comfort and joy" class="memory-image">
+                    <p class="memory-text">Together, we create the warmest memories that last forever. 🧸</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Note Section -->
+        <section class="scroll-reveal">
+            <div class="closing">
+                <p class="closing-text">"Whenever you need comfort, remember I'm always here."</p>
+                <span class="closing-emoji">🧸❤️</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        Your teddy, always. 🧸❤️
+    </footer>
+
+    <!-- Hug Popup -->
+    <div class="hug-popup-overlay" id="hugOverlay"></div>
+    <div class="hug-popup" id="hugPopup">
+        <div class="popup-teddy">🧸</div>
+        <div class="popup-hearts">💕💕💕</div>
+        <p class="popup-message">Here's a big warm hug just for you! You're never alone. 🫂</p>
+        <button class="popup-close" id="closePopup">Close</button>
+    </div>
+
+    <script>
+        // Create floating hearts
+        const heartsBg = document.getElementById('heartsBg');
+        const heartSymbols = ['💕', '🧸', '❤️', '💝', '🫂'];
+        
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsBg.appendChild(heart);
+        }
+
+        // Music toggle
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = '🎵 Music Off';
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicToggle.textContent = '🎵 Music On';
+                isPlaying = true;
+            }
+        });
+
+        // Hug button functionality
+        const hugButton = document.getElementById('hugButton');
+        const hugPopup = document.getElementById('hugPopup');
+        const hugOverlay = document.getElementById('hugOverlay');
+        const closePopup = document.getElementById('closePopup');
+
+        function showHug() {
+            hugPopup.classList.add('active');
+            hugOverlay.classList.add('active');
+        }
+
+        function hideHug() {
+            hugPopup.classList.remove('active');
+            hugOverlay.classList.remove('active');
+        }
+
+        hugButton.addEventListener('click', showHug);
+        closePopup.addEventListener('click', hideHug);
+        hugOverlay.addEventListener('click', hideHug);
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
